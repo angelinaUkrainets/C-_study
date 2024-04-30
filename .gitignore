@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+.vs/*
+Task2_GitRepo/x64/*
+*.opendb
