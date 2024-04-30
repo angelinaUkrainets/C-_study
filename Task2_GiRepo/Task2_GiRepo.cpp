@@ -1,6 +1,7 @@
 #include <iostream>
 
+//task1
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cout << "I love C++\n";
 }
