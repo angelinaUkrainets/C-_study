@@ -1,0 +1,6 @@
+﻿  Task2_GiRepo.cpp
+C:\courses\Task2_fGitRepo\Task2_GiRepo\Task2_GiRepo.cpp(32,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\courses\Task2_fGitRepo\Task2_GiRepo\Task2_GiRepo.cpp(33,41): warning C4305: 'initializing': truncation from '__int64' to 'unsigned long'
+C:\courses\Task2_fGitRepo\Task2_GiRepo\Task2_GiRepo.cpp(33,29): warning C4309: 'initializing': truncation of constant value
+C:\courses\Task2_fGitRepo\Task2_GiRepo\Task2_GiRepo.cpp(37,15): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Task2_GiRepo.vcxproj -> C:\courses\Task2_fGitRepo\x64\Debug\Task2_GiRepo.exe
