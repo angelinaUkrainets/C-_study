@@ -1,2 +1,4 @@
 ﻿  Task2_GiRepo.cpp
-  Task2_GiRepo.vcxproj -> C:\courses\Task2_gitRepo\x64\Debug\Task2_GiRepo.exe
+C:\courses\Task2_gitRepo\Task2_GiRepo\Task2_GiRepo.cpp(28,22): error C2248: 'Rectangle::~Rectangle': cannot access protected member declared in class 'Rectangle'
+C:\courses\Task2_gitRepo\Task2_GiRepo\Task2_GiRepo.cpp(11): message : see declaration of 'Rectangle::~Rectangle'
+C:\courses\Task2_gitRepo\Task2_GiRepo\Task2_GiRepo.cpp(5): message : see declaration of 'Rectangle'
