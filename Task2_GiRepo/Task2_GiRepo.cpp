@@ -1,86 +1,152 @@
 #include <iostream>
 using namespace std;
 
-//long (*funcPtr) (int); //вказівник на функцію яка приймає інт та повертає лонг
-//long* Function(int); //звичайна функція приймає інт і вертає вказівник на тип лонг
+//task1
+//class Vehicle {
+//public:
+//	virtual void ShowInfo() = 0;
+//	virtual void ChangeColor(string color) = 0;
+//};
+//
+//class Bus : public Vehicle {
+//	string _idNum, _color;
+//	int _numOfSeats;
+//
+//public:
+//	Bus() {
+//		_idNum = "AC0934HA";
+//		_color = "yellow";
+//		_numOfSeats = 15;
+//	}
+//	~Bus(){}
+//
+//	void ShowInfo() {
+//		cout << "Number: " << _idNum << "\tColor: " << _color << "\tNumber of seats: " << _numOfSeats << endl;
+//	}
+//	void ChangeColor(string color) {
+//		_color = color;
+//	}
+//};
+//
+//class Car : public Vehicle {
+//	string _idNum, _color;
+//
+//public:
+//	Car() {
+//		_idNum = "AX0284HA";
+//		_color = "black";
+//	}
+//	~Car() {}
+//
+//	void ShowInfo() {
+//		cout << "Number: " << _idNum << "\tColor: " << _color << endl;
+//	}
+//	void ChangeColor(string color) {
+//		_color = color;
+//	}
+//};
 
-void Square(int&, int&);
-void Cube(int&, int&);
-void Swap(int&, int&);
-void GetVals(int&, int&);
-void PrintVals(int&, int&);
+//task2
+class Vehicle {
+public:
+	virtual void ShowInfo() = 0;
+	virtual void ChangeColor(string color) = 0;
+};
+
+void Vehicle::ShowInfo() { cout << "Abstract datatype" << endl; }
+
+class Car : public Vehicle {
+
+public:
+	virtual void ShowInfo() = 0;
+	virtual void Go() = 0;
+};
+
+void Car::ShowInfo() {
+	cout << "Car" << endl;
+	Vehicle::ShowInfo();
+}
+
+class SportsCar : public Car {
+public:
+	void ShowInfo() {
+		cout << "Sports Car" << endl;
+		Car::ShowInfo();
+	}
+
+	void Go() {
+		cout << "Car is going" << endl;
+	}
+
+	void ChangeColor(string color) {
+		cout << "Changing color" << endl;
+	}
+};
+
+class Wagon : public Car {
+public:
+	void ShowInfo() {
+		cout << "Wagon" << endl;
+		Car::ShowInfo();
+	}
+
+	void Go() {
+		cout << "Car is going" << endl;
+	}
+
+	void ChangeColor(string color) {
+		cout << "Changing color" << endl;
+	}
+};
+
+class Couple : public Car {
+public:
+	void ShowInfo() {
+		cout << "Couple Car" << endl;
+		Car::ShowInfo();
+	}
+
+	void Go() {
+		cout << "Car is going" << endl;
+	}
+
+	void ChangeColor(string color) {
+		cout << "Changing color" << endl;
+	}
+};
+
+//task 3
+class Animal {
+	static int numOnFarm;
+	string nameOfAnimal;
+
+public:
+	Animal(string name) {
+		nameOfAnimal = name;
+		numOnFarm++;
+	}
+	~Animal()
+	{
+		numOnFarm--;
+	}
+
+	void Show() {
+		cout << "Animal : " << nameOfAnimal << "\tNum on farm : " << numOnFarm << endl;
+	}
+};
+
+int Animal::numOnFarm = 0;
 
 int main() {
-	void (*pFunc)(int&, int&);
-	bool fQuit = false;
+	Wagon* w = new Wagon();
+	w->ShowInfo();
 
-	int valOne = 1, valTwo = 2;
-	int choice;
+	delete w;
 
-	while (!fQuit) {
-		cout << "(0)Quit (1)Change values (2)Square (3)Cube (4)Swap :";
-		cin >> choice;
+	Animal dog("Dog"), cow("Cow"), horse("Horse");
+	dog.Show();
 
-		switch (choice)
-		{
-		case 1:
-			pFunc = GetVals;
-			break;
-		case 2:
-			pFunc = Square;
-			break;
-		case 3:
-			pFunc = Cube;
-			break;
-		case 4:
-			pFunc = Swap;
-			break;
-		default:
-			pFunc = nullptr;
-			fQuit = true;
-			break;
-		}
+	cow.~Animal();
 
-		if (fQuit)
-			break;
-		else {
-			PrintVals(valOne, valTwo);
-			pFunc(valOne, valTwo);
-			PrintVals(valOne, valTwo);
-		}
-	}
-}
-
-void PrintVals(int &x, int &y) {
-	cout << "x: " << x << " y: " << y << endl;
-}
-
-void Square(int& rX, int& rY) {
-	rX *= rX;
-	rY *= rY;
-}
-
-void Cube(int& rX, int& rY) {
-	int tmp;
-	tmp = rX;
-	rX *= rX;
-	rX *= rX;
-
-	tmp = rY;
-	rY *= rY;
-	rY *= rY;
-}
-
-void Swap(int& rX, int& rY) {
-	int temp;
-	temp = rX;
-	rX = rY;
-	rY = temp;
-}
-
-void GetVals(int& rValOne, int& rValTwo) {
-	cout << "New value for ValOne : ";
-	cin >> rValOne;
-	cout << "New value for ValTwo :";
-	cin >> rValTwo;
+	dog.Show();
 }
