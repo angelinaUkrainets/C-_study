@@ -1,129 +1,20 @@
 #include <iostream>
 using namespace std;
 
-//task1
-//class Vehicle {
-//public:
-//	virtual void ShowInfo() = 0;
-//	virtual void ChangeColor(string color) = 0;
-//};
-//
-//class Bus : public Vehicle {
-//	string _idNum, _color;
-//	int _numOfSeats;
-//
-//public:
-//	Bus() {
-//		_idNum = "AC0934HA";
-//		_color = "yellow";
-//		_numOfSeats = 15;
-//	}
-//	~Bus(){}
-//
-//	void ShowInfo() {
-//		cout << "Number: " << _idNum << "\tColor: " << _color << "\tNumber of seats: " << _numOfSeats << endl;
-//	}
-//	void ChangeColor(string color) {
-//		_color = color;
-//	}
-//};
-//
-//class Car : public Vehicle {
-//	string _idNum, _color;
-//
-//public:
-//	Car() {
-//		_idNum = "AX0284HA";
-//		_color = "black";
-//	}
-//	~Car() {}
-//
-//	void ShowInfo() {
-//		cout << "Number: " << _idNum << "\tColor: " << _color << endl;
-//	}
-//	void ChangeColor(string color) {
-//		_color = color;
-//	}
-//};
-
-//task2
-class Vehicle {
-public:
-	virtual void ShowInfo() = 0;
-	virtual void ChangeColor(string color) = 0;
-};
-
-void Vehicle::ShowInfo() { cout << "Abstract datatype" << endl; }
-
-class Car : public Vehicle {
-
-public:
-	virtual void ShowInfo() = 0;
-	virtual void Go() = 0;
-};
-
-void Car::ShowInfo() {
-	cout << "Car" << endl;
-	Vehicle::ShowInfo();
-}
-
-class SportsCar : public Car {
-public:
-	void ShowInfo() {
-		cout << "Sports Car" << endl;
-		Car::ShowInfo();
-	}
-
-	void Go() {
-		cout << "Car is going" << endl;
-	}
-
-	void ChangeColor(string color) {
-		cout << "Changing color" << endl;
-	}
-};
-
-class Wagon : public Car {
-public:
-	void ShowInfo() {
-		cout << "Wagon" << endl;
-		Car::ShowInfo();
-	}
-
-	void Go() {
-		cout << "Car is going" << endl;
-	}
-
-	void ChangeColor(string color) {
-		cout << "Changing color" << endl;
-	}
-};
-
-class Couple : public Car {
-public:
-	void ShowInfo() {
-		cout << "Couple Car" << endl;
-		Car::ShowInfo();
-	}
-
-	void Go() {
-		cout << "Car is going" << endl;
-	}
-
-	void ChangeColor(string color) {
-		cout << "Changing color" << endl;
-	}
-};
-
-//task 3
+//task 1
 class Animal {
 	static int numOnFarm;
 	string nameOfAnimal;
+	string color;
+	string age;
 
 public:
-	Animal(string name) {
+	Animal(string name, string color, string age) {
 		nameOfAnimal = name;
 		numOnFarm++;
+		this->age = age;
+		this->color = color;
+		this->nameOfAnimal = nameOfAnimal;
 	}
 	~Animal()
 	{
@@ -133,20 +24,65 @@ public:
 	void Show() {
 		cout << "Animal : " << nameOfAnimal << "\tNum on farm : " << numOnFarm << endl;
 	}
+	static int GetNumOnFarm() { return numOnFarm; }
+	string GetColor() { return color; }
+	string GetNameOfAnimal() { return nameOfAnimal; }
+	string GetAge() { return age; }
 };
 
 int Animal::numOnFarm = 0;
 
 int main() {
-	Wagon* w = new Wagon();
-	w->ShowInfo();
+	//task 2 & 3
+	Animal* an1 = new Animal("Dog", "Brown", "3");
+	an1->Show();
+	Animal* an2 = new Animal("Cow", "White-Black", "7");
+	an2->Show();
+	Animal* an3 = new Animal("Cat", "Red", "10");
+	an3->Show();
 
-	delete w;
+	//task 4
+	string (Animal:: * ptrGetColor)();
+	ptrGetColor = &Animal::GetColor;
 
-	Animal dog("Dog"), cow("Cow"), horse("Horse");
-	dog.Show();
+	cout << "Color of first animal is " << (an1->*ptrGetColor)() << endl;
 
-	cow.~Animal();
+	//task 5
+	string(Animal:: * pGetSomeData)();
+	int chooseVar = 0;
+	do
+	{
+		cout << "(0)Quit (1)GetColor (2)GetName (3)GetAge" << endl;
+		cin >> chooseVar;
 
-	dog.Show();
+		switch (chooseVar)
+		{
+		case 1:
+			pGetSomeData = &Animal::GetColor;
+			cout << "Color is ";
+			break;
+		case 2:
+			pGetSomeData = &Animal::GetNameOfAnimal;
+			cout << "Name is ";
+			break;
+		case 3:
+			pGetSomeData = &Animal::GetAge;
+			cout << "Age is ";
+			break;
+		default:
+			cout << "QUIT" << endl;;
+			pGetSomeData = nullptr;
+			break;
+		}
+
+		if(pGetSomeData)
+			cout << (an1->*pGetSomeData)() << endl;
+	} while (chooseVar!=0);
+
+	delete an1;
+	cout << "Num after first delete: " << Animal::GetNumOnFarm() << endl;
+	delete an2;
+	cout << "Num after second delete: " << Animal::GetNumOnFarm() << endl;
+	delete an3;
+	cout << "Num after third delete: " << Animal::GetNumOnFarm() << endl;
 }
